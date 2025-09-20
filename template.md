@@ -4,26 +4,34 @@ Sept 20, 2025
 
 I’m an R Markdown document!
 
-# Section 1
+## Problem 1
 
-Here’s a **code chunk** that samples from a *normal distribution*:
+\#loading moderndive
 
 ``` r
 library(moderndive)
+library(tidyverse)
+```
+
+    ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+    ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+    ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+    ## ✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+    ## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+    ## ✔ purrr     1.1.0     
+    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ✖ dplyr::filter() masks stats::filter()
+    ## ✖ dplyr::lag()    masks stats::lag()
+    ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+``` r
 data("early_january_weather")
 ```
 
-## early_january_weather Description
+\#early_january_weather Description
 
 Number of rows 358  
-Number of columns 15
-
-------------------------------------------------------------------------
-
-Column type frequency:  
-character 1  
-numeric 13  
-POSIXct 1
+Number of columns 15 The mean of the Temperature is 39.58212
 
 ``` r
 early_january_weather
@@ -112,7 +120,24 @@ write.csv(early_january_weather, "early_january_weather.csv", row.names = FALSE)
 ```
 
 ``` r
-early_january_weather = 
-  janitor::clean_names(early_january_weather
-                      )
+mean(early_january_weather$temp)
+```
+
+    ## [1] 39.58212
+
+# Scatterplot
+
+In the scatterplot, from January 1-23, 2013 we see that around January
+10th humidity starts to increase. Average temperature during this time
+was 39.58 fahrenheit.
+
+``` r
+ggplot(early_january_weather, aes(x = time_hour, y = temp, colour = humid)) + 
+    geom_point()
+```
+
+![](template_files/figure-gfm/yx_scatter-1.png)<!-- -->
+
+``` r
+ggsave("temp_vs_time.png", width = 8, height = 5)
 ```

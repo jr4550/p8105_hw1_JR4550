@@ -6,36 +6,28 @@ date: Sept 20, 2025
 
 I'm an R Markdown document! 
 
-# Section 1
+## Problem 1 
 
-Here's a **code chunk** that samples from 
-a _normal distribution_:
+#loading moderndive 
 
 ```{r setup}
 library(moderndive)
+library(tidyverse)
 data("early_january_weather")
 ```
 
-## early_january_weather Description
+
+#early_january_weather Description
            
 Number of rows             358                  
 Number of columns          15 
-
-_______________________                         
-Column type frequency:                          
-  character                1                    
-  numeric                  13                   
-  POSIXct                  1  
-  
-  
-
+The mean of the Temperature is 39.58212
 
 ```{r}
 early_january_weather
 nrow(early_january_weather)
 ncol(early_january_weather)
 ```
-
 
 ```{r}
 skimr::skim(early_january_weather)
@@ -45,8 +37,18 @@ write.csv(early_january_weather, "early_january_weather.csv", row.names = FALSE)
 
 ```
 ```{r}
-early_january_weather = 
-  janitor::clean_names(early_january_weather
-                      )
+mean(early_january_weather$temp)
 ```
+
+# Scatterplot 
+
+In the scatterplot, from January 1-23, 2013 we see that around January 10th humidity starts to increase. Average temperature during this time was 39.58 fahrenheit. 
+```{r yx_scatter}
+ggplot(early_january_weather, aes(x = time_hour, y = temp, colour = humid)) + 
+    geom_point()
+```
+```{r}
+ggsave("temp_vs_time.png", width = 8, height = 5)
+```
+
 
