@@ -1,6 +1,7 @@
 ---
 title: "p8105_hw1_jr4550"
 output: github_document
+date: Sept 20, 2025
 ---
 
 I'm an R Markdown document! 
@@ -10,12 +11,42 @@ I'm an R Markdown document!
 Here's a **code chunk** that samples from 
 a _normal distribution_:
 
-```{r}
-samp = rnorm(100)
-length(samp)
+```{r setup}
+library(moderndive)
+data("early_january_weather")
 ```
 
-# Section 2
+## early_january_weather Description
+           
+Number of rows             358                  
+Number of columns          15 
 
-I can take the mean of the sample, too!
-The mean is `r mean(samp)`.
+_______________________                         
+Column type frequency:                          
+  character                1                    
+  numeric                  13                   
+  POSIXct                  1  
+  
+  
+
+
+```{r}
+early_january_weather
+nrow(early_january_weather)
+ncol(early_january_weather)
+```
+
+
+```{r}
+skimr::skim(early_january_weather)
+```
+```{r}
+write.csv(early_january_weather, "early_january_weather.csv", row.names = FALSE)
+
+```
+```{r}
+early_january_weather = 
+  janitor::clean_names(early_january_weather
+                      )
+```
+
